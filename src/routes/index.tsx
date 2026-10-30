@@ -124,12 +124,12 @@ function Index() {
             </Reveal>
           </div>
           <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }} className="relative mx-auto w-full max-w-md">
-            <div className="absolute inset-x-4 bottom-0 top-16 overflow-hidden rounded-[3rem] bg-card shadow-soft">
+            <div className="absolute inset-x-4 inset-y-0 overflow-hidden rounded-[3rem] bg-card shadow-soft">
               <div className="absolute inset-0 bg-brand opacity-15" />
               <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 30, ease: "linear" }} className="absolute -right-20 -top-20 h-64 w-64 rounded-full border-[18px] border-secondary/20" />
               <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ repeat: Infinity, duration: 6 }} className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-accent/25 blur-2xl" />
             </div>
-            <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }} className="absolute -inset-2 top-10 rounded-[3.5rem] border-2 border-dashed border-primary/20" />
+            <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }} className="absolute -inset-3 rounded-full border-2 border-dashed border-primary/20" />
             <img src={doctor} alt="Dr. Shoaib H Khan, child specialist" width={872} height={1216} className="relative z-10 mx-auto w-[88%] mix-blend-multiply" />
             <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0, y: [0, -6, 0] }} transition={{ delay: 1.4, y: { repeat: Infinity, duration: 3.5 } }} className="glass absolute -right-2 bottom-36 z-20 flex items-center gap-2 rounded-2xl p-3 shadow-soft">
               <HeartPulse className="h-5 w-5 animate-pulse text-destructive" /><span className="text-sm font-bold text-navy">Newborn Care</span>
