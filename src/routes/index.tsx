@@ -4,7 +4,8 @@ import { useState, type FormEvent, type ReactNode } from "react";
 import {
   Phone, MapPin, Clock, Baby, Wind, Brain, Apple, ShieldPlus, Award, HeartPulse, Stethoscope, CalendarCheck, CheckCircle2,
 } from "lucide-react";
-import doctor from "@/assets/doctor.jpg";
+import doctorAsset from "@/assets/dr-shoaib.jpg.asset.json";
+const doctor = doctorAsset.url;
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const PHONE = "01330-668121";
@@ -98,7 +99,9 @@ function Index() {
 
       {/* Hero */}
       <section id="top" className="bg-hero relative overflow-hidden px-5 pb-20 pt-32 md:pt-40">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+        <motion.div aria-hidden animate={{ x: [0, 40, 0], y: [0, 30, 0] }} transition={{ repeat: Infinity, duration: 14 }} className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-secondary/20 blur-3xl" />
+        <motion.div aria-hidden animate={{ x: [0, -40, 0], y: [0, -20, 0] }} transition={{ repeat: Infinity, duration: 16 }} className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
           <div>
             <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-flex items-center gap-2 rounded-full bg-secondary/10 px-4 py-1.5 text-sm font-medium text-secondary">
               <Baby className="h-4 w-4" /> আপনার সুস্বাস্থ্যের অভিভাবক
@@ -121,18 +124,34 @@ function Index() {
             </Reveal>
           </div>
           <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }} className="relative mx-auto w-full max-w-md">
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-brand opacity-20 blur-2xl" />
-            <img src={doctor} alt="Dr. Shoaib H Khan, child specialist" width={896} height={1120} className="relative aspect-[4/5] w-full rounded-[2rem] object-cover shadow-soft" />
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="glass absolute -left-4 bottom-10 flex items-center gap-3 rounded-2xl p-3 shadow-soft">
+            <div className="absolute inset-x-4 inset-y-0 overflow-hidden rounded-[3rem] bg-card shadow-soft">
+              <div className="absolute inset-0 bg-brand opacity-15" />
+              <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 30, ease: "linear" }} className="absolute -right-20 -top-20 h-64 w-64 rounded-full border-[18px] border-secondary/20" />
+              <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ repeat: Infinity, duration: 6 }} className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-accent/25 blur-2xl" />
+            </div>
+            <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }} className="absolute -inset-3 rounded-full border-2 border-dashed border-primary/20" />
+            <img src={doctor} alt="Dr. Shoaib H Khan, child specialist" width={872} height={1216} className="relative z-10 mx-auto w-[88%] mix-blend-multiply" />
+            <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0, y: [0, -6, 0] }} transition={{ delay: 1.4, y: { repeat: Infinity, duration: 3.5 } }} className="glass absolute -right-2 bottom-36 z-20 flex items-center gap-2 rounded-2xl p-3 shadow-soft">
+              <HeartPulse className="h-5 w-5 animate-pulse text-destructive" /><span className="text-sm font-bold text-navy">Newborn Care</span>
+            </motion.div>
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="glass absolute -left-4 bottom-10 z-20 flex items-center gap-3 rounded-2xl p-3 shadow-soft">
               <span className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-secondary-foreground"><Clock className="h-5 w-5" /></span>
               <div className="text-sm"><p className="font-bold text-navy">Everyday</p><p className="text-muted-foreground">5:00 – 8:00 PM</p></div>
             </motion.div>
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 5 }} className="glass absolute -right-3 top-8 flex items-center gap-2 rounded-2xl p-3 shadow-soft">
+            <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 5 }} className="glass absolute -right-3 top-20 z-20 flex items-center gap-2 rounded-2xl p-3 shadow-soft">
               <MapPin className="h-5 w-5 text-primary" /><span className="text-sm font-bold text-navy">Jhalokathi</span>
             </motion.div>
           </motion.div>
         </div>
       </section>
+
+      <div className="overflow-hidden border-y border-border bg-navy py-4">
+        <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ repeat: Infinity, duration: 30, ease: "linear" }} className="flex w-max gap-10 whitespace-nowrap font-display font-semibold text-primary-foreground">
+          {[...services, ...services].map((s, i) => (
+            <span key={i} className="flex items-center gap-3"><s.icon className="h-5 w-5 text-accent" />{s.bn}</span>
+          ))}
+        </motion.div>
+      </div>
 
       {/* About */}
       <section id="about" className="px-5 py-20">
@@ -169,7 +188,7 @@ function Index() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {services.map((s, i) => (
               <Reveal key={s.en} delay={i * 0.08}>
-                <div className="group h-full rounded-3xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-2 hover:shadow-soft">
+                <div className="group h-full rounded-3xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-2 hover:border-secondary/50 hover:shadow-soft">
                   <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand text-primary-foreground transition-transform group-hover:rotate-6 group-hover:scale-110"><s.icon className="h-7 w-7" /></span>
                   <h3 className="mt-5 font-display text-xl font-bold text-navy">{s.en}</h3>
                   <p className="mt-2 text-muted-foreground">{s.bn}</p>
